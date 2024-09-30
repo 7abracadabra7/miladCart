@@ -1,8 +1,8 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import Products from "./pages/Products";
-import DetailsPage from "./pages/DetailsPage";
-import CheckoutPage from "./pages/CheckoutPage";
-import PageNotFound from "./pages/404";
+import Products from "../pages/Products";
+import DetailsPage from "../pages/DetailsPage";
+import CheckoutPage from "../pages/CheckoutPage";
+import PageNotFound from "../pages/404";
 
 const App = () => {
   return (
