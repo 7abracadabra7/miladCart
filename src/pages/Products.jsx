@@ -6,19 +6,23 @@ import { FaList } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { categoryFilter } from "../helper/helper";
 import { searchValue } from "../helper/helper";
+import { createQueryObject } from "../helper/helper";
+import { useSearchParams } from "react-router-dom";
 
 const Products = () => {
   const products = useProducts();
   const [showProducts, setShowProducts] = useState([]);
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState({});
-  console.log(showProducts);
+  const [searchParams, setSearchParams] = useSearchParams();
+  console.log(query , "query");
 
   useEffect(() => {
     setShowProducts(products);
   }, [products]);
 
   useEffect(() => {
+    setSearchParams(query);
     let finalResult = categoryFilter(products, query.category);
     finalResult = searchValue(finalResult, query.search);
     setShowProducts(finalResult);
@@ -27,11 +31,11 @@ const Products = () => {
   const categoryHandler = (event) => {
     const category = event.target.innerText.toLowerCase();
     if (event.target.tagName !== "LI") return;
-    setQuery((q) => ({ ...q, category }));
+    setQuery((q) => createQueryObject(q, { category }));
   };
 
   const searchHandler = () => {
-    setQuery((q) => ({ ...q, search }));
+    setQuery((q) => createQueryObject(q, { search }));
   };
 
   return (
