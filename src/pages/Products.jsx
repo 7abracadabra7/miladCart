@@ -1,13 +1,16 @@
 import { useProducts } from "../context/ProductContext";
+import { useSearchParams } from "react-router-dom";
 import Card from "../components/Card";
 import styles from "./Products.module.css";
 import Loader from "../components/Loader";
 import { FaList } from "react-icons/fa";
 import { useEffect, useState } from "react";
+
+// Functions
 import { categoryFilter } from "../helper/helper";
 import { searchValue } from "../helper/helper";
 import { createQueryObject } from "../helper/helper";
-import { useSearchParams } from "react-router-dom";
+import { getInitialQuery } from "../helper/helper";
 
 const Products = () => {
   const products = useProducts();
@@ -15,10 +18,11 @@ const Products = () => {
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState({});
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(query , "query");
+  console.log(query, "query");
 
   useEffect(() => {
     setShowProducts(products);
+    setQuery(getInitialQuery(searchParams));
   }, [products]);
 
   useEffect(() => {
